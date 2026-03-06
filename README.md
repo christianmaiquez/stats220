@@ -7,8 +7,8 @@
 
 ### A little about me:
 
-1. I am undertaking a degree in Electrical & Electronics Engineering & Geographic Information Science
-2. I am taking STATS 220 because it sounded interesting with the intersection of stats and the digital world
+1. I am undertaking a degree in **Electrical & Electronics Engineering** & **Geographic Information Science**
+2. I am taking STATS 220 because it sounded interesting with the **intersection of stats and the digital world**
 3. I am interested in learning about all this course has to offer
 
 **These are some websites that I will visit often to help me with this course:**
