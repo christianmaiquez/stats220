@@ -12,8 +12,8 @@
 3. I am interested in learning about all this course has to offer
 
 **These are some websites that I will visit often to help me with this course:**
-* [Youtube](https://www.youtube.com/) 
-* [Spotify](https://open.spotify.com/)
+* [Youtube](https://www.youtube.com/) *For when I need alternative explanations to difficult concepts*
+* [Spotify](https://open.spotify.com/) *For when I am grinding through assignments :)*
   
 ![](https://media.tenor.com/pHWIw7DC12kAAAAm/yt-youtube.webp)
 
