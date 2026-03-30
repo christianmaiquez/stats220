@@ -1,0 +1,137 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+```
+
+```{css}
+body {
+  background-color: #1D328C;
+}
+
+h1 {
+  font-weight: bold;
+  color: #F5E069;
+  margin-top: 30px;
+  font-family: Garamond;
+  text-align: center;
+}
+
+h2 {
+  font-weight: bold;
+  color: #F5E069;
+  margin-top: 20px;
+  font-family: Garamond;
+}
+
+h3 {
+  font-weight: bold;
+  color: #EDB542;
+  margin-top: 20px;
+  font-family: Garamond;
+  text-align: center;
+}
+
+p {
+  font-size: 20px; 
+  color: #F5E069;
+  text-align: center;
+}
+
+img {
+  border: 3px solid #FFF7B5;
+  border-radius: 12px;
+  box-shadow: 4px 4px 10px #C7AB0A;
+}
+
+
+```
+
+## Tracking Dinner-Time Habits: What we eat and how long we eat. 
+
+
+```{r}
+library(tidyverse)
+
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vRtooUe7AqusW3lvKHbySHpUves0YKRRIZ57_LFvESY-KkJlDF3Z7p2hlxLPNCeoQAh39kmjqdshw2I/pub?output=csv")
+
+latest_data <- logged_data %>%
+  rename(
+    money = `How much did you spend on dinner? ($NZD)`,
+    cuisine = `What was the cuisine of meal you ate?`,
+    vegetable_types = `How much different kinds of vegetables were in the meal you ate?`,
+    time = `How long did it take for you to eat dinner? (Minutes)`
+  ) 
+
+# How much time have I spent eating dinner for my recently recorded dinners?
+sum_time_minutes <- sum(latest_data$time)
+sum_time_hours <- round(sum_time_minutes / 60, 0)
+```
+
+### The data I collected comes from a Google Form about my dinner-time habits. It includes information about how much money I spent on dinner, what cuisine I ate, how many types of vegetables were in my meal, and how long it took me to finish eating. The purpose of my analysis is to explore patterns in my eating behaviour. This is because I have always wondered about my eating habits. Do I waste time eating slowly? Or do I speed through my dinners?
+
+The amount of minutes I have spent eating my dinners so far is... 
+
+# `r paste(sum_time_minutes)` \n
+
+This is roughly **`r paste(sum_time_hours)`** hours
+
+
+```{r}
+# Creates a bar graph showing how long it takes for me to eat dinner
+bar_graph1 <- latest_data %>%
+  ggplot() +
+  geom_bar(aes(x = time), fill = "#C7AB0A") +
+  labs(title = "Time taken to eat dinner",
+       subtitle = "How long does it take to eat dinner?",
+       x = "Time (Minutes)",
+       y = "Frequency",
+       caption = "Source: Google Form"
+  )
+
+bar_graph1
+```
+
+### This bar graph shows that I can eat both very quickly and very slowly. Perhaps, depending on how many assignments I have or how much of a rush I am in, I will eat my dinner correspondingly.  
+
+
+```{r}
+# Round mean vegetables to whole numbers because it does not make sense to have
+# 2.5 mean amount of vegetables kinds.
+# This will be my first numeric value
+mean_veges <- round(mean(latest_data$vegetable_types), 0)
+```
+
+The average amount of different kinds of vegetables I eat per dinner is a whopping 
+
+# `r mean_veges` different kinds of vegetables
+
+(I need to diversify my diet and eat more vegetables...)
+
+### Although the number of different vegetables in each meal is recorded as a whole number, the average calculated from the dataset produced a value with many decimal places. This is not meaningful in a real-life context, because you cannot eat a fractional number of different vegetables. For this reason, I rounded the average to the nearest whole number so that the summary statistic better reflects the practical nature of the data.
+
+```{r}
+# Creates bar graph that shows how many vegetables are eaten
+bar_graph2 <- latest_data %>%
+  ggplot() +
+  geom_bar(aes(x = vegetable_types), fill = "#00A80F") +
+  labs(title = "Kinds of vegetables in meals",
+       subtitle = "Do I eat healthy meals?",
+       x = "Number of different vegetables",
+       y = "Frequency",
+       caption = "Source: Google Form"
+  )
+
+bar_graph2
+```
+
+### This bar graph shows that I do eat healthy meals with vegetables for dinner, but zero vegetables has the second highest frequency of different kinds of vegetables. This tells me there are some meals I eat that do not have vegetables, and that I could be eating more healthy. 
+
+
+
+
+
