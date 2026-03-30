@@ -131,7 +131,29 @@ bar_graph2
 
 ### This bar graph shows that I do eat healthy meals with vegetables for dinner, but zero vegetables has the second highest frequency of different kinds of vegetables. This tells me there are some meals I eat that do not have vegetables, and that I could be eating more healthy. 
 
+```{r, echo=FALSE}
+library(magick)
 
+frog_img <- "https://i.pinimg.com/236x/36/40/b2/3640b2d99dde2f999e2d910cfb3e1fca.jpg"
+
+img <- image_read(frog_img) %>%
+  image_scale("500")
+
+text_box <- image_blank(width = 500, height = 100, color = "darkblue")
+
+text_box <- image_annotate(text_box, 
+                           text = "Me after eating too much dinner",
+                           size = 30,     
+                           gravity = "center",
+                           font = "Garamond",
+                           color = "yellow")
+
+final <- image_join(img, text_box) %>% 
+  image_append(stack = TRUE)
+
+final
+
+```
 
 
 
